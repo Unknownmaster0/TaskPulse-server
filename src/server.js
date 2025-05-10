@@ -25,3 +25,5 @@ app.listen(3000, () => {
     console.log('Press Ctrl+C to stop the server');
 })
 
+
+export default app;
