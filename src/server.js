@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
-import connectDB from './db';
+import connectDB from './db/index.js';
 
 const app = express();
 
@@ -20,10 +20,18 @@ try {
     process.exit(1);
 }
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
     console.log('Press Ctrl+C to stop the server');
 })
+
+// Handling the routing logic here.
+import UserRouter from './routes/user.route.js';
+import TaskRouter from './routes/task.route.js';
+
+app.use('/api/user', UserRouter);
+app.use('/api/task', TaskRouter);
 
 
 export default app;
