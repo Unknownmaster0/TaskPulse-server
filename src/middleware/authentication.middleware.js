@@ -15,7 +15,8 @@ const AuthenticateUser = function (req, res, next) {
   }
 
   try {
-    jwt.verify(token, process.env.ACCESS_TOKEN); // have the data of the user.
+    const payload = jwt.verify(token, process.env.JWT_SECRET); // have the data of the user.
+    req.id = payload.id;
     next();
   } catch (err) {
     console.error(`Error while verifying user in AuthenticateUser: ${err}`);
