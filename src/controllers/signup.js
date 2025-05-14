@@ -3,12 +3,13 @@ import ApiReponse from "../utils/ApiResponse.js";
 import status_code from "../utils/status_code.js";
 import jwt from "jsonwebtoken";
 
-const Signup = async (req, res) => {
+const SignupController = async (req, res) => {
     const { username, email, password } = req.body;
     // console.log(username, email, password); // this come after validation only.
     // convert the email to lowercase. 
     try {
         const user = await User.create({username, email: email.toLowerCase(), password});
+        // access token
         const AccessToken = jwt.sign({id: user._id, name: user.username}, process.env.JWT_SECRET)
         return res.status(status_code.CREATED.code).json(new ApiReponse({
             statusCode: status_code.CREATED.code,
@@ -28,4 +29,4 @@ const Signup = async (req, res) => {
     }
 }
 
-export default Signup;
+export default SignupController;

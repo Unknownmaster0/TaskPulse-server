@@ -2,7 +2,7 @@
   "name": "@taskpulse/server",
   "type": "module",
   "scripts": {
-    "dev": "node ./src/server.js"
+    "dev": "nodemon ./src/server.js"
   },
   "packageManager": "yarn@4.9.1",
   "dependencies": {
@@ -14,6 +14,7 @@
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "nodemon": "^3.1.10",
     "prettier": "3.5.3"
   }
 }

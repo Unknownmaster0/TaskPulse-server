@@ -21,16 +21,16 @@ const userSchema = new mongoose.Schema({
 
 
 // Hash the password before saving the user
-userSchema.pre('save', function(next) {
+userSchema.pre('save', async function(next) {
     if (this.isModified('password')) {
-        this.password = bcrypt.hash(this.password, saltRounds);
+        this.password = await bcrypt.hash(this.password, saltRounds);
     }
     next();
 })
 
 // Method to compare password
-userSchema.methods.comparePassword = function(password) {
-    return bcrypt.compare(password, this.password);
+userSchema.methods.comparePassword = async function(password) {
+    return await bcrypt.compare(password, this.password);
 }
 
 const User = mongoose.model('User', userSchema);
